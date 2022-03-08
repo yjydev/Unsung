@@ -34,22 +34,22 @@
     
 * 주키퍼의 각 znode는 경로에 참조 된다. (항상 절대경로로 참조)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/39ee42de-e3e0-4c37-9fd4-abb6856ab2f0/Untitled.png)
+![image](https://user-images.githubusercontent.com/46081043/157213706-a1cbeddc-75c6-446c-a282-d242a8fb4e43.png)
 
 * 읽기는 follower가 쓰기는 대표가 커밋함
 
 ## Zookeeper 실행 테스트
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9e91d03f-074b-4a0e-8d3a-5bb1e81bce9e/Untitled.png)
+![image](https://user-images.githubusercontent.com/46081043/157213800-4e5692dc-0be9-4e2e-b8b4-0868f813389e.png)
 
 * 서버 한대만 주키퍼를 실행시켰을 때 에러 로그 출력 → 과반수 이상이 실행되어야 정상 실행으로 판단하기 때문이다.
 * 2개 이상 서버가 올라가는 순간 에러 로그가 뜨지 않음
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69e93890-4e97-4895-9daa-4a8332f3c314/Untitled.png)
+![image](https://user-images.githubusercontent.com/46081043/157213917-bbb26f93-80d4-482e-b1cf-f1bf4401eab6.png)
 
 * 서버 하나 종료 시켰을 때
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6dcd9b90-32e9-44aa-8e27-a589d94bf6ab/Untitled.png)
+![image](https://user-images.githubusercontent.com/46081043/157214074-024d18f5-47e4-47c8-b2bb-085e977a6047.png)
 
 * 상태 확인
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b3c2ce68-88fe-4f01-9f4b-fde46c4a9db7/Untitled.png)
+![image](https://user-images.githubusercontent.com/46081043/157214161-baaa5880-16d2-4a9d-a82c-d13891a696d2.png)

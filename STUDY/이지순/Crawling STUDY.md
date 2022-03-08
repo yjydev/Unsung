@@ -1,8 +1,8 @@
 # Crawling
 참고 페이지
 
-* [https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=020&listType=title&date=20220308](https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=020&listType=title&date=20220308)
-* [https://www.bigkinds.or.kr/v2/news/search.do](https://www.bigkinds.or.kr/v2/news/search.do)
+* [네이버뉴스](https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=020&listType=title&date=20220308)
+* [bigkinds](https://www.bigkinds.or.kr/v2/news/search.do)
     ⇒ bigkinds 페이지보다 url이 명확해서 네이버 뉴스 참조
 
  
@@ -28,13 +28,8 @@
     * ex 동아일보의 경우 20000430 부터 지원
 
 ### 결과
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cf5e30f3-7853-4eae-b1b0-7951cc70f783/Untitled.png)
-
 * 내용까지 크롤링
-    
-    [결과.txt](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/18b73fc7-819d-4ae7-9f8a-d90d4af5b19b/결과.txt)
-    
+    ![image](https://user-images.githubusercontent.com/46081043/157214400-cf8c627a-5ba7-435e-95e6-51a4276717a7.png)
 
 참고 자료
 
