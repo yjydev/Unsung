@@ -15,7 +15,7 @@ positive = [pos.replace("\n", "") for pos in positive]
 labels = []
 titles = []
 
-f = open('코로나.csv', 'r', encoding="UTF8")
+f = open('코로나.csv', 'r', encoding='utf-8')
 rdr = csv.reader(f)
 
 for line in rdr:
@@ -23,10 +23,10 @@ for line in rdr:
     # clean_title = re.sub('[-=+,#/\?:^$.@*\"※~$%!·」』\\')
     clean_title = re.sub('[-=+,#/\?:^.@*\"※~ㆍ!』\\‘|\(\)\[\]\<\>`\'…》\”\“\’·]', ' ', title)
     negative_flag = False
-    label = 0
+    label = 2
     for i in range(len(negative)):
         if negative[i] in clean_title:
-            label = -1
+            label = 0
             negative_flag = True
             # print("negative 비교단어: ",negative[i], "제목: ",clean_title)
             break
