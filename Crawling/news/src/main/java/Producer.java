@@ -111,6 +111,8 @@ public class Producer {
                         // am
                         if (timeSpl[1].equals("오후") && !timeSpl[2].substring(0, 2).equals("12")) {
                             newsDate = date.plusHours(12);
+                        } else if(timeSpl[1].equals("오전") && timeSpl[2].substring(0, 2).equals("12")) {
+                            newsDate = date.minusHours(12);
                         } else {
                             newsDate = date;
                         }
