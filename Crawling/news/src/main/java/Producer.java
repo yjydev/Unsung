@@ -9,40 +9,40 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 public class Producer {
 
     public static void main(String[] args) throws InterruptedException, IOException {
-//        String[] oid = {"001", "025", "052", "055", "056", "437"};
-//
-//        HashMap<String, String> press = new HashMap<>();
-//        press.put("001", "연합뉴스");
-//        press.put("025", "중앙일보");
-//        press.put("052", "YTN");
-//        press.put("055", "SBS");
-//        press.put("056", "KBS");
-//        press.put("437", "JTBC");
-//
-//        for(int i=0;i<oid.length;i++) {
-//            crawlingPage(oid[i], press.get(oid[i]));
-//        }
-//        crawlingPage("025", "중앙일보", 20210101, 20210131);
-        crawlingPage("025", "중앙일보", 20210201, 20210228);
-        crawlingPage("025", "중앙일보", 20210301, 20210331);
-        crawlingPage("025", "중앙일보", 20210401, 20210430);
-        crawlingPage("025", "중앙일보", 20210501, 20210531);
-        crawlingPage("025", "중앙일보", 20210601, 20210630);
-        crawlingPage("025", "중앙일보", 20210701, 20210731);
-        crawlingPage("025", "중앙일보", 20210801, 20210831);
-        crawlingPage("025", "중앙일보", 20210901, 20210930);
-        crawlingPage("025", "중앙일보", 20211001, 20211031);
-        crawlingPage("025", "중앙일보", 20211101, 20211130);
-        crawlingPage("025", "중앙일보", 20211201, 20211231);
+        String[] oid = {"001", "025", "052", "055", "056", "437"};
 
+        HashMap<String, String> press = new HashMap<>();
+        press.put("001", "연합뉴스");
+        press.put("025", "중앙일보");
+        press.put("052", "YTN");
+        press.put("055", "SBS");
+        press.put("056", "KBS");
+        press.put("437", "JTBC");
+
+        for(int i=1;i<oid.length;i++) {
+            crawlingPage(oid[i], press.get(oid[i]), 20210101, 20210131);
+            crawlingPage(oid[i], press.get(oid[i]), 20210201, 20210228);
+            crawlingPage(oid[i], press.get(oid[i]), 20210301, 20210331);
+            crawlingPage(oid[i], press.get(oid[i]), 20210401, 20210430);
+            crawlingPage(oid[i], press.get(oid[i]), 20210501, 20210531);
+            crawlingPage(oid[i], press.get(oid[i]), 20210601, 20210630);
+            crawlingPage(oid[i], press.get(oid[i]), 20210701, 20210731);
+            crawlingPage(oid[i], press.get(oid[i]), 20210801, 20210831);
+            crawlingPage(oid[i], press.get(oid[i]), 20210901, 20210930);
+            crawlingPage(oid[i], press.get(oid[i]), 20211001, 20211031);
+            crawlingPage(oid[i], press.get(oid[i]), 20211101, 20211130);
+            crawlingPage(oid[i], press.get(oid[i]), 20211201, 20211231);
+
+        }
     }
 
     public static void crawlingPage(String oid, String pressName, int start, int end) throws IOException {
-        File csv = new File("/home/hadoop/IdeaProjects/data/" + pressName+".csv");
+        File csv = new File("C:\\특화프로젝트\\DATA\\" + pressName+".csv");
         BufferedWriter bw = null;
         bw = new BufferedWriter(new FileWriter(csv, true));
 
@@ -51,16 +51,16 @@ public class Producer {
         // 전체 페이지 정보 가져오기
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
 
-        for (int i = start+3;i<=end;i++) {
+        for (int i = start;i<=end;i++) {
 
-            String pageCnt = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=020&listType=title&date=" + i;
+            String pageCnt = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid="+oid+"&listType=title&date=" + i;
             Document doc = Jsoup.connect(pageCnt).get();
             Elements elements = doc.select("div[class=\"paging\"] > a");
             int max = elements.size() + 1;
 
             for (int j = 1; j <= max; j++) {
-                System.out.println("page: " + j);
-                String URL = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=020&listType=title&date=" + i + "&page=" + j;
+//                System.out.println("page: " + j);
+                String URL = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid="+oid+"&listType=title&date=" + i + "&page=" + j;
 
                 doc = Jsoup.connect(URL).get();
                 elements = doc.select("div[class=\"paging\"] > a");
@@ -83,6 +83,7 @@ public class Producer {
                         if (subDoc.getElementById("articleTitle") == null) {
                             if (subDoc.getElementsByClass("end_tit").isEmpty()) {
                                 // 스포츠
+//                                System.out.println("스포츠");
                                 title = subDoc.selectFirst("div[class=\"news_headline\"] > h4[class=\"title\"]").text();
                                 content = subDoc.getElementById("newsEndContents").text();
                                 time = subDoc.selectFirst("div.info > span").text();
@@ -115,10 +116,10 @@ public class Producer {
                         }
 
                         System.out.println("제목: " + title);
-                        System.out.println("내용: " + content);
+//                        System.out.println("내용: " + content);
                         System.out.println("시간: " + newsDate);
                         System.out.println("기사 링크: " + newsUrl);
-                        System.out.println();
+//                        System.out.println();
 
 //                        String info = title+"\t"+content+"\t"+newsDate+"\t"+newsUrl+"\t";
                         bw.append(title + "\t");
@@ -135,3 +136,4 @@ public class Producer {
     }
 
 }
+
