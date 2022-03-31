@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.ssafy.unsung.repository.TopKeyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,7 @@ public class KeywordService {
 	private KeywordRepository keywordRepository;
 	
 	@Transactional
-	public List<Keyword> findKeywords(String keyword){
-		List<Keyword> keywordInfo = keywordRepository.findByKeyword(keyword);
-		return keywordInfo;
+	public List<TopKeyword> findTopKeyword(){
+		return keywordRepository.findTopKeyword();
 	}
 }

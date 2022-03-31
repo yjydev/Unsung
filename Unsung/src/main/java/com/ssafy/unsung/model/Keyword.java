@@ -19,35 +19,17 @@ import lombok.Setter;
 @NoArgsConstructor // 파라미터가 없는 기본 생성자 생성
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자
 @Entity
-@Table(name = "News_Analyze")
+@Table(name = "Keyword_History")
 public class Keyword {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "code")
-	private int code;
-	
-	@Column(name = "keyword", columnDefinition = "varchar(20)")
+	@Column(name = " keyword", nullable = false)
 	private String keyword;
 	
-	@Column(name = "date")
+	@Column(name = "date", nullable = false)
 	private String date;
-	
-	@Column(name = "total_count", columnDefinition = "int unsigned")
-	private int total_count;
-	
-	@Column(name = "negative_count", columnDefinition = "int unsigned default '0'")
-	private int negative_count;
-	
-	@Column(name = "neutral_count", columnDefinition = "int unsigned default '0'")
-	private int neutral_count;
-	
-	@Column(name = "positive_count", columnDefinition = "int unsigned default '0'")
-	private int positive_count;
-	
-	@Column(name = "unclassified_count", columnDefinition = "int unsigned default '0'")
-	private int unclassified_count;
 }
