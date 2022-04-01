@@ -1,17 +1,16 @@
 package com.ssafy.unsung.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.Generated;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenerationTime;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -32,9 +31,11 @@ public class News {
 	
 	@Column(name = "keyword", columnDefinition = "varchar(20)", nullable = false)
 	private String keyword;
-	
-	@Column(name = "date", nullable = false)
-	private String date;
+
+	//@Generated(GenerationTime.INSERT)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date", nullable = false, updatable = false, insertable = false)
+	private Date date;
 	
 	@Column(name = "total_count", columnDefinition = "int unsigned", nullable = false)
 	private int total_count;

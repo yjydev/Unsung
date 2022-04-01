@@ -34,3 +34,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar{
+	archivesBaseName = 'unsung'
+	archiveFileName = 'unsung.jar'
+	archiveVersion = "0.0.1"
+}
