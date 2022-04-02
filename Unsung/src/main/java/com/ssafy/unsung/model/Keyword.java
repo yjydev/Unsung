@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Builder
@@ -29,7 +31,7 @@ public class Keyword {
 	
 	@Column(name = " keyword", nullable = false)
 	private String keyword;
-	
-	@Column(name = "date", nullable = false)
-	private String date;
+
+	@Column(name = "date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Date date;
 }
