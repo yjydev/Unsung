@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.ssafy.unsung.repository.WordCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,6 @@ public class NewsService {
 		List<News> NewsInfo = newsRepository.findByKeyword(keyword);
 		return NewsInfo;
 	}
+
+	public List<WordCount> wordCount() {return newsRepository.wordCount();}
 }
