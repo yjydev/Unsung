@@ -28,23 +28,15 @@ public class LatestNews {
 
         for (Element liEle : element.select("li")) {
             NewsDto newsDto = new NewsDto();
-            String title = null;
-            String photo = null;
-            String press = null;
-            String url = null;
 
-            if(!liEle.getElementsByClass("photo").isEmpty()) {
-                Element a = liEle.selectFirst("dl > dt[class=\"photo\"] > a");
-                photo = a.select("img").attr("src");
-                title = a.select("img").attr("alt");
-                url = a.attr("href");
-            } else {
-                Element a = liEle.selectFirst("dl > dt > a");
-                title = a.text();
-                url = a.attr("href");
-            }
+            Element photoEle = liEle.selectFirst("dl > dt[class=\"photo\"] > a");
+            String photo = photoEle.select("img").attr("src");
 
-            press = liEle.select("dd > span[class=\"writing\"]").text();
+            Element info = liEle.selectFirst("dl > dt > a");
+            String title = info.text();
+            String url = info.attr("href");
+            String press = liEle.select("dd > span[class=\"writing\"]").text();
+
             newsDto.setImage(photo);
             newsDto.setTitle(title);
             newsDto.setPress(press);
