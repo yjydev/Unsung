@@ -36,12 +36,16 @@ public class NewNewsService {
             Element photoEle = liEle.selectFirst("dl > dt[class=\"photo\"] > a");
             String photo = photoEle.select("img").attr("src");
 
+            if(photo.equals("")){
+                photo = "no image";
+            }
+
             Element info = liEle.selectFirst("dl > dt > a");
             String title = info.text();
             String url = info.attr("href");
             String press = liEle.select("dd > span[class=\"writing\"]").text();
 
-            newNewsDto.setImage(photo);
+            //newNewsDto.setImage(photo);
             newNewsDto.setTitle(title);
             newNewsDto.setPress(press);
             newNewsDto.setUrl(url);
