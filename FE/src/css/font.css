@@ -3,3 +3,17 @@
 .Jua {
   font-family: "Jua", sans-serif;
 }
+
+.center {
+  text-align: center;
+  margin: auto;
+}
+
+.input {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: aliceblue;
+  color:black;
+  padding: .8em .5em;
+}

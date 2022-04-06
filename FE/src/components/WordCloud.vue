@@ -4,9 +4,8 @@
     :md="size === 2 ? 6 : size === 3 ? 4 : undefined"
   >
   <base-card
-      :height="value.prominent ? 450 : 350"
+      :height="value.prominent ? 550 : 450"
       color="white"
-      href="#!"
     >
     <v-chip
       label
@@ -43,9 +42,9 @@ import "@/css/font.css";
     },
     methods:{
       getKeyWordList(){
-         http.get(`/api/news/search/wordcount`).then(({data})=>{
+        http.get(`/api/news/search/wordcount`).then(({data})=>{
         this.words = data;
-        console.log(this.words);
+        // console.log(this.words);
         this.genLayout();
       })
       },

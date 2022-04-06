@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class KeywordDto {
 
-	public int id;
 	public String keyword;
-	public String date;
-	//public int keyword_count;
+
 }

@@ -1,9 +1,12 @@
 package com.ssafy.unsung.service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.ssafy.unsung.dto.KeywordDto;
 import com.ssafy.unsung.repository.TopKeyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +23,13 @@ public class KeywordService {
 	@Transactional
 	public List<TopKeyword> findTopKeyword(){
 		return keywordRepository.findTopKeyword();
+	}
+
+	@Transactional
+	public Keyword saveKeyword(KeywordDto keywordDto){
+		Keyword keyword = Keyword.builder()
+				.keyword(keywordDto.getKeyword())
+				.build();
+		return keywordRepository.save(keyword);
 	}
 }

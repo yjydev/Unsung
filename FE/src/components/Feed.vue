@@ -7,9 +7,12 @@
       <word-cloud
         :size="layout[0]"
       />
+      <news
+        :size="layout[5]"
+      />
     </v-row>
 
-    <v-row align="center">
+    <!-- <v-row align="center">
       <v-col cols="3">
         <base-btn
           v-if="page !== 1"
@@ -43,7 +46,7 @@
           <v-icon>mdi-chevron-right</v-icon>
         </base-btn>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
@@ -57,8 +60,8 @@
     name: 'Feed',
 
     components: {
-      FeedCard: () => import('@/components/FeedCard'),
       WordCloud: () => import('@/components/WordCloud'),
+      News: () => import('@/components/News')
     },
 
     data: () => ({
@@ -67,16 +70,16 @@
     }),
 
     computed: {
-      ...mapState(['articles']),
-      pages () {
-        return Math.ceil(this.articles.length / 11)
-      },
-      paginatedArticles () {
-        const start = (this.page - 1) * 11
-        const stop = this.page * 11
+      // ...mapState(['articles']),
+      // pages () {
+      //   return Math.ceil(this.articles.length / 11)
+      // },
+      // paginatedArticles () {
+      //   const start = (this.page - 1) * 11
+      //   const stop = this.page * 11
 
-        return this.articles.slice(start, stop)
-      },
+      //   return this.articles.slice(start, stop)
+      // },
     },
 
     watch: {
