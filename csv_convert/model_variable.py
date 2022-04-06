@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 device = torch.device("cpu")
-model_PATH = "../model/"
+model_PATH = "./model/"
 model = BertForSequenceClassification.from_pretrained("bert-base-multilingual-cased", num_labels=3)
 
 optimizer = AdamW(model.parameters(),
