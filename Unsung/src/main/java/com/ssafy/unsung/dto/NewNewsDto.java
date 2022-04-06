@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewNewsDto {
-    //private String image;
+    private String image;
     private String title;
     private String press;
     private String url;
