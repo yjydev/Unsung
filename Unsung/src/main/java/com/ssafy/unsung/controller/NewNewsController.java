@@ -22,4 +22,9 @@ public class NewNewsController {
     public ResponseEntity<List<NewNewsDto>> newNews() throws IOException {
         return new ResponseEntity<List<NewNewsDto>>(newNewsService.crawling(), HttpStatus.OK);
     }
+
+    @GetMapping("/news/{keyword}")
+    public ResponseEntity<List<NewNewsDto>> keywordNews(@PathVariable("keyword")String keyword) throws IOException{
+        return ResponseEntity.ok(newNewsService.crawling(keyword));
+    }
 }
