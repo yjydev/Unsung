@@ -20,4 +20,16 @@ public class NewsDto {
 	private int neutral_count;
 	private int positive_count;
 	private int unclassified_count;
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class NewsDto {
+    private String image;
+    private String title;
+    private String press;
+    private String url;
 }
