@@ -1,15 +1,5 @@
 package com.ssafy.unsung.service;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import com.ssafy.unsung.repository.WordCount;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.ssafy.unsung.model.News;
-import com.ssafy.unsung.repository.NewsRepository;
 import com.ssafy.unsung.dto.NewsDto;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,16 +18,6 @@ import java.util.ArrayList;
 @Service
 public class NewsService {
 
-	@Autowired
-	private NewsRepository newsRepository;
-	
-	@Transactional
-	public List<News> findKeywords(String keyword){
-		List<News> NewsInfo = newsRepository.findByKeyword(keyword);
-		return NewsInfo;
-	}
-
-	public List<WordCount> wordCount() {return newsRepository.wordCount();}
     @Transactional
     public ArrayList<NewsDto> crawling() throws IOException {
         ArrayList<NewsDto> list = new ArrayList<>();

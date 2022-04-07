@@ -1,6 +1,7 @@
 package com.ssafy.unsung.controller;
 
 import com.ssafy.unsung.model.KeywordRatio;
+import com.ssafy.unsung.repository.KeywordPercent;
 import com.ssafy.unsung.repository.WordCount;
 import com.ssafy.unsung.service.KeywordRatioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class KeywordRatioController {
     private KeywordRatioService keywordRatioService;
 
     @GetMapping("search/{keyword}")
-    public ResponseEntity<List<KeywordRatio>> search(@PathVariable("keyword") String keyword){
+    public ResponseEntity<List<KeywordPercent>> search(@PathVariable("keyword") String keyword){
         return ResponseEntity.ok(keywordRatioService.findKeyword(keyword));
     }
 
