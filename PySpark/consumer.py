@@ -11,6 +11,14 @@ import json
 
 import numpy as np
 
+# INFO 로그 안보이게
+from pyspark import SparkContext
+
+sc = SparkContext()
+log4jLogger = sc._jvm.org.apache.log4j
+log4jLogger.LogManager.getLogger("org").setLevel(log4jLogger.Level.OFF)
+log4jLogger.LogManager.getLogger("akka").setLevel(log4jLogger.Level.OFF)
+
 spark_session = SparkSession \
     .builder \
     .appName("pyspark_kafka_consum") \
