@@ -30,6 +30,7 @@
             x-large
             plain
             @click="search"
+            @keyup.enter="search"
             style="margin-left:20px;"
           >Search
           </v-btn>
@@ -50,6 +51,8 @@
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
+
+import {mapState} from 'vuex';
 
   export default {
     name: 'HomeBanner',
@@ -81,7 +84,8 @@ import "@/css/font.css";
           // this.$router.go;
         }
         else{
-        this.searched = true;
+          this.$store.dispatch('SearchKeyword', this.keyword)
+        // this.searched = true;
         http.post(`/api/keyword/search`, JSON.stringify(this.keyword)).then((data)=>{
           console.log(data);
           console.log(JSON.stringify(this.keyword));
@@ -91,6 +95,11 @@ import "@/css/font.css";
         }
       }
 
+    },
+    computed: {
+      ...mapState([
+        'searchword',
+      ]),
     }
   }
 </script>
