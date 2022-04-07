@@ -1,11 +1,8 @@
 <template>
 <v-col
     cols="12"
-    :md="size === 2 ? 6 : size === 3 ? 4 : undefined"
   >
-  <base-card
-      :height="value.prominent ? 600 : 500"
-    >
+  <base-card>
     <v-chip
       label
       color="grey darken-3"

@@ -1,4 +1,5 @@
 <template>
+  <v-row>
   <v-col
     cols="5"
     md="5"
@@ -15,6 +16,7 @@
       <div class="center" id="my_dataviz">
       </div>
   </v-col>
+  </v-row>
 </template>
 <script>
 import http from "@/util/http-common";
