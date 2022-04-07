@@ -1,6 +1,6 @@
 <template>
   <v-col
-    cols="5"
+    cols="9"
     md="5"
   >
   <v-chip
@@ -12,14 +12,19 @@
       @click.stop=""
       >키워드의 언론사 성향 그래프
     </v-chip>
-      <div class="center" id="my_dataviz">
+    <div class="inline">
+      <div class="center inline" id="my_dataviz1">
+        <div class="center inline" id="my_dataviz1">
+          <div class="center inline" id="my_dataviz1">
+          </div>
+        </div>
       </div>
+    </div>
   </v-col>
 </template>
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
-import {mapState} from 'vuex';
 
 export default {
   name: "DoughnutChartItem",
@@ -41,8 +46,8 @@ export default {
     drawChart(){
       const d3 = require("d3");
       // set the dimensions and margins of the graph
-          var width = 450;
-          var height = 450;
+          var width = 350;
+          var height = 350;
           var margin = 40;
 
           // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
@@ -50,7 +55,7 @@ export default {
 
           // append the svg object to the div called 'my_dataviz'
           var svg = d3
-            .select('#my_dataviz')
+            .select('#my_dataviz1')
             .append('svg')
             .attr('width', width)
             .attr('height', height)
@@ -96,11 +101,12 @@ export default {
             .style('stroke-width', '2px')
             .style('opacity', 0.7);
     }
-  },
-  computed: {
-    ...mapState([
-      'searchword',
-    ]),
-    }
+  }
 };
 </script>
+<style>
+.inline{
+  display: inline-block;
+}
+
+</style>

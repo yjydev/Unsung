@@ -12,12 +12,13 @@
       />
       <chart
       />
+      <normal-chart
+      />
     </v-row>
   </v-container>
 </template>
 
 <script>
-
   // Utilities
 
   export default {
@@ -26,7 +27,8 @@
     components: {
       WordCloud: () => import('@/components/WordCloud'),
       News: () => import('@/components/News'),
-      Chart: () => import('@/components/Chart')
+      Chart: () => import('@/components/Chart'),
+      NormalChart: () => import('@/components/NormalChart')
     },
 
     data: () => ({
