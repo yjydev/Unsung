@@ -88,6 +88,31 @@
     load_examples = False
     ```
 
+4. Airflow 설정
+    * 프로세스 자동화를 위한 py 파일은 airflow.cfg의 가장 상단에 있는 dags_folder에 존재하는 Workflow 파이썬 파일만 인식
+    * bash 명령어 입력 시 절대경로로!
+    ```python
+    from datetime import datetime
+    import pendulum
+    from airflow import DAG
+    from airflow.operators.bash_operator import BashOperator
+
+    local_tz = pendulum.timezone("Asia/Seoul")
+    
+    dag = DAG(
+        'crawlingFlow',  # DAG id
+        start_date=datetime(2022, 3, 28, tzinfo=local_tz),  # 언제부터 DAG이 시작되는가
+        schedule_interval='*/30 * * * *',  # 10 min
+        catchup=False)
+    
+    t1 = BashOperator(task_id='joongang', bash_command='java -jar /home/hadoop/airflow/dags/joongang-crawling.jar', dag=dag)
+
+    t1
+    ```
+
+5. 실행확인
+![image](https://user-images.githubusercontent.com/46081043/160289718-a65caa6c-d935-493d-a759-3f14f465352f.png)
+
 ### 참고 - JAR 파일 생성
 
 - File → Project Structure → Artifacts + → JAR → From modules with dependencies → Main class 선택 → MANIFEST.MF 파일 위치 선택 → output derectory 선택하고 OK
