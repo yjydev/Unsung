@@ -5,4 +5,8 @@ public interface KeywordPercent {
     Integer getPositive();
     Integer getNeutral();
     Integer getUnclassified();
+    Integer getTotal();
+    String getKeyword();
+    String getPress();
+    String getPeriod();
 }
