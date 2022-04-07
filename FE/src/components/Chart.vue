@@ -19,6 +19,7 @@
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
+import {mapState} from 'vuex';
 
 export default {
   name: "DoughnutChartItem",
@@ -95,6 +96,11 @@ export default {
             .style('stroke-width', '2px')
             .style('opacity', 0.7);
     }
-  }
+  },
+  computed: {
+    ...mapState([
+      'searchword',
+    ]),
+    }
 };
 </script>
