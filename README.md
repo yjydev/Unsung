@@ -36,29 +36,50 @@
 
 **Backend**
 
-- IntelliJ
-- Spring Boot 2.6.5
+- IntelliJ <img src="https://img.shields.io/badge/IntelliJ-000000?style=flat-square&logo=IntelliJIDEA&logoColor=white"/>
+- Spring Boot 2.6.5 <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/>
 - Spring Boot JPA
-- JAVA 8
-- MySQL
-- AWS EC2
+- JAVA 8 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/>
+- MySQL <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+- AWS EC2 <img src="https://img.shields.io/badge/AWS EC2-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white"/>
 
 **Frontend**
 
-- Visual Studio Code
-- Vue
+- Visual Studio Code <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/>
+- Vue <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=black"/>
 
 **CI/CD**
 
-- AWS EC2
-- Docker
-- Nginx
+- AWS EC2 <img src="https://img.shields.io/badge/AWS EC2-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white"/>
+- Docker <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=black"/>
+- Nginx <img src="https://img.shields.io/badge/nginx-009639?style=flat-square&logo=nginx&logoColor=black"/>
 
 **협업 툴**
 
-- Git
-- Jira
-- Notion
-- Mattermost
+- Git <img src="https://img.shields.io/badge/git-F05032?style=flat-square&logo=Git&logoColor=white"/>
+- Jira <img src="https://img.shields.io/badge/jira-0052CC?style=flat-square&logo=Jirasoftware&logoColor=white"/>
+- Notion <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/>
+- Mattermost <img src="https://img.shields.io/badge/Mattermost-0058CC?style=flat-square&logo=Mattermost&logoColor=white"/>
 - Webex
-- Discord
+- Discord <img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/>
+
+### Git Flow 브랜치 전략
+
+---
+
+- Git Flow Model을 사용하고, Git 기본 명령어를 사용한다.
+- commit은 git-cz를 사용해서 commit한다.
+- Git Flow 사용 브랜치
+  - feature - 기능
+  - develop - 개발
+  - master - 배포
+- Git Flow 진행 방식
+  1. feature 브랜치가 완성되면 develop 브랜치로 pull request를 요청한다.
+  2. pull request가 요청되면, 모든 팀원이 코드 리뷰를 하고 merge를 진행한다.
+  3. 매주 금요일 develop 브랜치를 master 브랜치로 병합하여 배포를 진행한다.
+
+### Jira
+
+---
+
+일정 및 효율적인 개발을 위해 Jira를 사용했습니다.
