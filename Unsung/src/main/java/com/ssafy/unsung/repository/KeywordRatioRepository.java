@@ -13,7 +13,9 @@ public interface KeywordRatioRepository extends JpaRepository<KeywordRatio, Long
             "union all" +
             "(select * from month where keyword=:keyword and press='중앙일보' and period = '2022-03')" +
             "union all" +
-            "(select * from month where keyword=:keyword and press='SBS' and period = '2022-03')", nativeQuery = true)
+            "(select * from month where keyword=:keyword and press='SBS' and period = '2022-03')" +
+            "union all" +
+            "(select * from month where keyword=:keyword and press'KBS' and period = '2022-03')", nativeQuery = true)
     List<KeywordPercent> findByKeyword(@Param("keyword") String keyword);
 
     @Query(value = "select keyword, total, positive, negative, period from month where keyword=:keyword and press=:press", nativeQuery = true)
@@ -22,6 +24,6 @@ public interface KeywordRatioRepository extends JpaRepository<KeywordRatio, Long
     @Query(value = "select press, keyword, sum(total) as total from month where keyword=:keyword group by press;", nativeQuery = true)
     List<KeywordGraph2> graph2(@Param("keyword") String keyword);
 
-    @Query(value = "select keyword, count(keyword) as count from keywordratio where date = curdate() - interval 1 day group by keyword order by count(keyword) desc; ", nativeQuery = true)
+    @Query(value = "select keyword, count(keyword) as count from keywordratio where date = curdate() - interval 1 month group by keyword order by count(keyword) desc; ", nativeQuery = true)
     List<WordCount> wordCount();
 }
