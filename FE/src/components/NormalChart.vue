@@ -36,9 +36,11 @@ export default {
   data(){
     return{
       series2: [{
+            name: '키워드에 대한 기사',
             data: []
           }, {
-            data: [41280,99480,112570]
+            name: '전체 기사',
+            data: [41280,99480,112570,206928]
           }],
           chartOptions2: {
             chart: {
@@ -52,7 +54,7 @@ export default {
                 dataLabels: {
                   position: 'top',
                 },
-              }
+              },
             },
             dataLabels: {
               enabled: true,
@@ -72,9 +74,9 @@ export default {
               intersect: false
             },
             xaxis: {
-              categories: ['JTBC', 'SBS', '중앙일보'],
+              categories: ['JTBC', 'SBS', '중앙일보', 'KBS'],
             },
-          },
+          }
       // series: [],
       //     chartOptions: {
       //       chart: {
@@ -136,6 +138,7 @@ export default {
         this.series2[0]['data'].push(this.normal_data['jtbc'])
         this.series2[0]['data'].push(this.normal_data['sbs'])
         this.series2[0]['data'].push(this.normal_data['middle'])
+        this.series2[0]['data'].push(this.normal_data['kbs'])
 
         // this.series3[0]['data'] = []
         // this.series3[0]['data'].push((this.normal_data['jtbc']/41280 * 100).toFixed(5))

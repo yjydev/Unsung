@@ -83,6 +83,7 @@ import {mapState} from 'vuex';
           // this.$router.go;
         }
         else{
+          // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight, 'smooth');
           this.$store.dispatch('SearchKeyword', this.keyword)
           this.$store.dispatch('GetChat', this.keyword)
         // this.searched = true;

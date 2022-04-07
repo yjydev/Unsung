@@ -8,20 +8,20 @@
       text-color="white"
       small
       @click.stop=""
-      >{{searchword}} 에 대한 언론사별 성향 변화 추이
+      >{{searchword}} 에 대한 {{trans_press}} 성향 변화 추이
   </v-chip>
   </v-row>
 
   <v-row>
-    <v-col align="left" cols="1">
-    <v-select :items="items" label="언론사 선택" filled v-model="press" @change="get_trans"></v-select>
+    <v-col align="left" cols="auto">
+    <v-select :items="items" label="언론사 선택" filled v-model="select_press" @change="get_trans"></v-select>
     </v-col>
   </v-row>
 
   <v-row>
-    <v-col cols="12">
+    <v-col cols="12" id="chart">
     <div v-if="trans_data['keyword'] == searchword">
-     <apexchart type="line" height="550" width="100%" :options="chartOptions" :series="series"></apexchart>
+     <apexchart type="line" height="550px" width="100%" :options="chartOptions" :series="series"></apexchart>
     </div>
 
     <div v-else>
@@ -47,8 +47,8 @@ export default {
   },
   data(){
     return{
-      items:['jtbc','sbs','중앙일보'],
-      press : '',
+      items:['jtbc','kbs','sbs','중앙일보'],
+      select_press : '',
       series: [{
             name: '긍정',
             type: 'column',
@@ -67,6 +67,7 @@ export default {
           }],
       chartOptions: {
             chart: {
+              id: 'trans_chart',
               height: 500,
               type: 'line',
               stacked: false
@@ -78,7 +79,7 @@ export default {
               width: [1, 1, 4]
             },
             title: {
-              text: `${this.searchword} 에 대한 성향`,
+              text: '2021-01 ~ 2022.03 성향 변화 추이',
               align: 'left',
               offsetX: 110
             },
@@ -177,7 +178,25 @@ export default {
         this.series[0]['data'] = []
         this.series[1]['data'] = []
         this.series[2]['data'] = []
-        this.$store.dispatch('GetTransChart', [this.searchword, this.press])
+        this.series = [
+          {
+            name: '긍정',
+            type: 'column',
+            data: [],
+            color: '#3498db',
+          }, {
+            name: '부정',
+            type: 'column',
+            data: [],
+            color: '#e74c3c',
+          }, {
+            name: '전체',
+            type: 'line',
+            data: [],
+            color :'#9575cd',
+          }
+        ]
+        this.$store.dispatch('GetTransChart', [this.searchword, this.select_press])
         this.chartOptions['xaxis']['categories'].forEach(date=>{
           // console.log(date in Object.keys(this.trans_data))
           if (Object.keys(this.trans_data).includes(date)) {
@@ -191,12 +210,12 @@ export default {
             this.series[2]['data'].push(0)
           }
         })
-        console.log(this.series)
+        // console.log(this.series)
         
       }
     },
     update_press() {
-      this.$store.dispatch()
+      this.$store.dispatch('UpdatePress', this.select_press);
     }
   },
 
@@ -209,12 +228,15 @@ export default {
     },
   watch:{
     'searchword':'get_trans',
-    'press':'get_trans',
-    'press':'update_press',
+    'trans_press':'get_trans',
+    'select_press':'update_press',
   },
   mounted(){
     this.get_trans()
   },
+  // updated(){
+  //   this.get_trans()
+  // }
 };
 
 </script>

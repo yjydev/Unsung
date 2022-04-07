@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     searchword : null,
-    normal_data : {'keyword':'','jtbc': 0, 'sbs': 0, 'middle': 0},
+    normal_data : {'keyword':'','jtbc': 0, 'sbs': 0, 'middle': 0, 'kbs': 0},
     trans_data : {'keyword':'',
     '2021-01': '', '2021-02': '', '2021-03': '', '2021-04': '', '2021-05': '', '2021-06': '',
     '2021-07': '', '2021-08': '', '2021-09': '', '2021-10':'','2021-11': '', '2021-12': '',
@@ -30,10 +30,11 @@ export default new Vuex.Store({
     //   console.log(state.normal_data)
     // },
     GET_CHAT_DATA: function(state, data){
-      state.normal_data = {'jtbc': 0,'sbs':0,'middle':0}
+      state.normal_data = {'jtbc': 0,'sbs':0,'middle':0, 'kbs':0}
       state.normal_data['jtbc'] = data[0]['total']
-      state.normal_data['sbs'] = data[1]['total']
-      state.normal_data['middle'] = data[2]['total']
+      state.normal_data['sbs'] = data[2]['total']
+      state.normal_data['middle'] = data[3]['total']
+      state.normal_data['kbs'] = data[1]['total']
       state.normal_data['keyword'] = data[0]['keyword']
       // console.log(state.normal_data)
     },
