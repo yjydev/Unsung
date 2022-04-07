@@ -4,7 +4,7 @@
     :md="size === 2 ? 6 : size === 3 ? 4 : undefined"
   >
   <base-card
-      :height="value.prominent ? 550 : 450"
+      :height="value.prominent ? 600 : 500"
     >
     <v-chip
       label
@@ -39,13 +39,13 @@
           max-width="80"
         />
         <div>
-          <div class="subheading">
+          <div class="subheading Jua">
             언론사 : {{newspaper.press}}
           </div>
-          <div class="caption">
+          <div class="Jua">
             기사제목 : {{newspaper.title}}
           </div>
-          <div class="caption">
+          <div class="Jua">
             <a :href="newspaper.url">기사링크</a>
           </div>
         </div>

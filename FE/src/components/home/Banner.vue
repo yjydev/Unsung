@@ -50,11 +50,13 @@
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
+
   export default {
     name: 'HomeBanner',
 
     data(){
       return {
+      searched: false,
       text:[],
       keyword:""
       }
@@ -79,6 +81,7 @@ import "@/css/font.css";
           // this.$router.go;
         }
         else{
+        this.searched = true;
         http.post(`/api/keyword/search`, JSON.stringify(this.keyword)).then((data)=>{
           console.log(data);
           console.log(JSON.stringify(this.keyword));

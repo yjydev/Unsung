@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "chart.js": "^3.5.0",
     "d3": "^7.4.0",
     "d3-cloud": "^1.2.5",
+    "randomcolor": "^0.6.2",
     "vue": "^2.6.11",
     "vue-axios": "^3.4.1",
+    "vue-chartjs": "^3.5.1",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.23",
     "vuewordcloud": "^18.7.12",
