@@ -86,10 +86,7 @@ import {mapState} from 'vuex';
           // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight, 'smooth');
           this.$store.dispatch('SearchKeyword', this.keyword)
           this.$store.dispatch('GetChat', this.keyword)
-<<<<<<< HEAD
-=======
           this.$store.dispatch('GetDoughnutData', this.keyword)
->>>>>>> 7c9916151d676090edbfd0fbf99dbb5d1151d0a7
         // this.searched = true;
         http.post(`/api/keyword/search`, JSON.stringify(this.keyword)).then((data)=>{
           // console.log(data);

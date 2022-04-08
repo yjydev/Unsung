@@ -48,7 +48,7 @@ export default {
   data(){
     return{
       items:['jtbc','kbs','sbs','중앙일보'],
-      select_press : '',
+      select_press : 'jtbc',
       series: [{
             name: '긍정',
             type: 'column',
