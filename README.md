@@ -119,3 +119,7 @@ Webex와 Discord에서는 항상 모여서 개발을 진행하고, 회의를 진
 ## Unsung 서비스 화면
 
 1. 메인페이지
+   ![메인화면](README.assets/메인화면.png)
+2. 키워드 검색 후 차트
+   ![그래프1](README.assets/그래프1.png)
+   ![그래프2](README.assets/그래프2.png)
