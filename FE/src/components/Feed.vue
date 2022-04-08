@@ -42,7 +42,7 @@
     name: 'Feed',
 
     components: {
-      WordCloud: () => import('@/components/WordCloud'),
+      WordCloud: () => import('@/components/NewWordCloud'),
       News: () => import('@/components/News'),
       Chart: () => import('@/components/Chart'),
       NormalChart: () => import('@/components/NormalChart'),
