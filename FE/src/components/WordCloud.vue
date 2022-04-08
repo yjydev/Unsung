@@ -1,10 +1,8 @@
 <template>
 <v-col
     cols="12"
-    :md="size === 2 ? 6 : size === 3 ? 4 : undefined"
   >
   <base-card
-      :height="value.prominent ? 600 : 500"
       color="white"
     >
     <v-chip
@@ -16,6 +14,7 @@
       @click.stop=""
       >최근 Top 키워드
     </v-chip>
+
   <div id="word-cloud">
   </div>
   </base-card>
