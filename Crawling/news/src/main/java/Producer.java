@@ -3,6 +3,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import scala.annotation.implicitAmbiguous;
+import scala.annotation.implicitNotFound;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -53,10 +56,10 @@ public class Producer {
 
         for (int i = start;i<=end;i++) {
 
-            String pageCnt = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid="+oid+"&listType=title&date=" + i;
+            String pageCnt = "https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=" + oid + "&listType=title&date=" + i + "&page=200";
             Document doc = Jsoup.connect(pageCnt).get();
-            Elements elements = doc.select("div[class=\"paging\"] > a");
-            int max = elements.size() + 1;
+            Elements elements = doc.select("div[class=\"paging\"] > strong");
+            int max = Integer.parseInt(elements.text());
 
             for (int j = 1; j <= max; j++) {
 //                System.out.println("page: " + j);
