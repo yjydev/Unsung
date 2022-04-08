@@ -1,4 +1,5 @@
 <template>
+  <v-row>
   <v-col
     cols="5"
     md="5"
@@ -10,97 +11,130 @@
       text-color="white"
       small
       @click.stop=""
-      >키워드의 언론사 성향 그래프
+      >{{searchword}} 의 언론사별 성향 그래프
     </v-chip>
-      <div class="center" id="my_dataviz">
+    <div>
+       <div id="chart" class="inline">
+        <apexchart type="donut" :options="chartOptions" :series="series_JTBC"></apexchart>
+        <h4 class="center">언론사 : JTBC</h4>
       </div>
+      <div id="chart" class="inline">
+        <apexchart type="donut" :options="chartOptions" :series="series_SBS"></apexchart>
+        <h4 class="center">언론사 : SBS</h4>
+      </div>
+    </div>
   </v-col>
+  <v-col
+    cols="5"
+    md="5"
+  >
+  <v-chip
+      label
+      color="transparent"
+      background-color="white"
+      text-color="white"
+      small
+      @click.stop=""
+      >
+    </v-chip>
+  <div>
+      <div id="chart" class="inline">
+        <apexchart type="donut" :options="chartOptions" :series="series_MIDDLE"></apexchart>
+        <h4 class="center">언론사 : 중앙일보</h4>
+      </div>
+      <div id="chart" class="inline">
+        <apexchart type="donut" :options="chartOptions" :series="series_KBS"></apexchart>
+        <h4 class="center">언론사 : KBS</h4>
+      </div>
+    </div>
+  </v-col>
+  </v-row>
 </template>
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
 import {mapState} from 'vuex';
-
+import VueApexCharts from 'vue-apexcharts'
 export default {
   name: "DoughnutChartItem",
-  // props: {
-  //   data: {
-  //     type: Array,
-  //     required: true
-  //   }
-  // },
-  // data(){
-  //   return {
-  //     a: 9, b: 20, c: 30, d: 8, e: 12
-  //   }
-  // },
-  mounted() {
-    this.drawChart();
+  components:{
+    apexchart: VueApexCharts,
+  },
+  data(){
+    return{
+      series_JTBC: [44, 55, 41, 17],
+      series_SBS: [44, 55, 41, 17],
+      series_MIDDLE: [44, 55, 41, 17],
+      series_KBS: [44, 55, 41, 17],
+          chartOptions: {
+            chart: {
+              type: 'donut',
+            },
+            labels:["긍정", "부정", "중립", "미분류"],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 400
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          },
+
+    }
   },
   methods:{
-    drawChart(){
-      const d3 = require("d3");
-      // set the dimensions and margins of the graph
-          var width = 450;
-          var height = 450;
-          var margin = 40;
+    updateChart(){
+      if(this.searchword){
+        this.series_JTBC = []
+        this.series_JTBC[0] = this.doughnut_data_JTBC['positive']
+        this.series_JTBC[1] = this.doughnut_data_JTBC['negative']
+        this.series_JTBC[2] = this.doughnut_data_JTBC['neutral']
+        this.series_JTBC[3] = this.doughnut_data_JTBC['unclassified']
 
-          // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-          var radius = Math.min(width, height) / 2 - margin;
+        this.series_SBS = []
+        this.series_SBS[0] = this.doughnut_data_SBS['positive']
+        this.series_SBS[1] = this.doughnut_data_SBS['negative']
+        this.series_SBS[2] = this.doughnut_data_SBS['neutral']
+        this.series_SBS[3] = this.doughnut_data_SBS['unclassified']
 
-          // append the svg object to the div called 'my_dataviz'
-          var svg = d3
-            .select('#my_dataviz')
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height)
-            .append('g')
-            .attr(
-              'transform',
-              'translate(' + width / 2 + ',' + height / 2 + ')'
-            );
-          // http.get(`/api/`)
-          // Create dummy data
-          var data = { a: 20, b: 20, c: 20, d: 20, e: 20 };
+        this.series_MIDDLE = []
+        this.series_MIDDLE[0] = this.doughnut_data_MIDDLE['positive']
+        this.series_MIDDLE[1] = this.doughnut_data_MIDDLE['negative']
+        this.series_MIDDLE[2] = this.doughnut_data_MIDDLE['neutral']
+        this.series_MIDDLE[3] = this.doughnut_data_MIDDLE['unclassified']
 
-          // set the color scale
-          var color = d3
-            .scaleOrdinal()
-            .domain(Object.keys(data))
-            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56']);
-
-          // Compute the position of each group on the pie:
-          var pie = d3.pie().value(function (d) {
-            return d[1];
-          });
-
-          var data_ready = pie(Object.entries(data));
-
-          // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-          svg
-            .selectAll('whatever')
-            .data(data_ready)
-            .enter()
-            .append('path')
-            .attr(
-              'd',
-              d3
-                .arc()
-                .innerRadius(100) // This is the size of the donut hole
-                .outerRadius(radius)
-            )
-            .attr('fill', function (d) {
-              return color(d.data[0]);
-            })
-            .attr('stroke', 'black')
-            .style('stroke-width', '2px')
-            .style('opacity', 0.7);
+        this.series_KBS = []
+        this.series_KBS[0] = this.doughnut_data_KBS['positive']
+        this.series_KBS[1] = this.doughnut_data_KBS['negative']
+        this.series_KBS[2] = this.doughnut_data_KBS['neutral']
+        this.series_KBS[3] = this.doughnut_data_KBS['unclassified']
+      }
     }
   },
   computed: {
     ...mapState([
       'searchword',
+      'doughnut_data_JTBC',
+      'doughnut_data_SBS',
+      'doughnut_data_MIDDLE',
+      'doughnut_data_KBS'
     ]),
+    },
+    watch:{
+      'searchword' : 'updateChart'
+    },
+    mounted(){
+      this.updateChart()
     }
+
 };
 </script>
+<style>
+.inline{
+  display: inline-block;
+}
+</style>

@@ -1,8 +1,5 @@
 <template>
-  <v-col
-    cols="9"
-    md="5"
-  >
+  <div v-if="searchword">
   <v-chip
       label
       color="grey darken-3"
@@ -10,98 +7,162 @@
       text-color="white"
       small
       @click.stop=""
-      >키워드의 언론사 성향 그래프
+      >{{searchword}} 에 대한 언론사별 관심도
     </v-chip>
-    <div class="inline">
-      <div class="center inline" id="my_dataviz1">
-        <div class="center inline" id="my_dataviz1">
-          <div class="center inline" id="my_dataviz1">
-          </div>
-        </div>
-      </div>
+    <div v-if="normal_data['keyword'] == searchword">
+    <!--<apexchart type="polarArea" :options="chartOptions" :series="series" width="500"></apexchart>-->
+    <apexchart type="bar" height="430" :options="chartOptions2" :series="series2"></apexchart>
+    <!--<apexchart type="bar" height="350" :options="chartOptions3" :series="series3"></apexchart>-->
     </div>
-  </v-col>
+    <div v-else>
+    <div style="vertical-align:center">
+      <h1>{{searchword}} 에 대한 통계가 존재하지 않습니다.</h1>
+    </div>
+    </div>
+  </div>
 </template>
 <script>
 import http from "@/util/http-common";
 import "@/css/font.css";
+import {mapState} from 'vuex';
+import ApexCharts from 'apexcharts'
+import VueApexCharts from 'vue-apexcharts'
 
 export default {
   name: "DoughnutChartItem",
-  // props: {
-  //   data: {
-  //     type: Array,
-  //     required: true
-  //   }
-  // },
-  // data(){
-  //   return {
-  //     a: 9, b: 20, c: 30, d: 8, e: 12
-  //   }
-  // },
-  mounted() {
-    this.drawChart();
+  components:{
+    apexchart: VueApexCharts,
+  },
+  data(){
+    return{
+      series2: [{
+            name: '키워드에 대한 기사',
+            data: []
+          }, {
+            name: '전체 기사',
+            data: [41280,99480,112570,206928]
+          }],
+          chartOptions2: {
+            chart: {
+              type: 'bar',
+              height: 430
+            },
+            labels:['기사 수', '전체 기사 수'],
+            plotOptions: {
+              bar: {
+                horizontal: true,
+                dataLabels: {
+                  position: 'top',
+                },
+              },
+            },
+            dataLabels: {
+              enabled: true,
+              offsetX: -6,
+              style: {
+                fontSize: '12px',
+                colors: ['#fff']
+              }
+            },
+            stroke: {
+              show: true,
+              width: 1,
+              colors: ['#fff']
+            },
+            tooltip: {
+              shared: true,
+              intersect: false
+            },
+            xaxis: {
+              categories: ['JTBC', 'SBS', '중앙일보', 'KBS'],
+            },
+          }
+      // series: [],
+      //     chartOptions: {
+      //       chart: {
+      //         type: 'polarArea',
+      //       },
+      //       labels: ['JTBC', 'SBS', '중앙일보'],
+      //       stroke: {
+      //         colors: ['#fff']
+      //       },
+      //       fill: {
+      //         opacity: 0.9
+      //       },
+      //       responsive: [{
+      //         breakpoint: 750,
+      //         options: {
+      //           chart: {
+      //             width: 300
+      //           },
+      //           legend: {
+      //             position: 'bottom'
+      //           }
+      //         }
+      //       }]
+      //     },
+
+      // series3: [{
+      //       data: []
+      //     }],
+      //     chartOptions3: {
+      //       chart: {
+      //         type: 'bar',
+      //         height: 350
+      //       },
+      //       plotOptions: {
+      //         bar: {
+      //           borderRadius: 4,
+      //           horizontal: true,
+      //         }
+      //       },
+      //       dataLabels: {
+      //         enabled: false
+      //       },
+      //       xaxis: {
+      //         categories: ['jtbc','sbs','middle'],
+      //       }
+      //     },
+    }
   },
   methods:{
-    drawChart(){
-      const d3 = require("d3");
-      // set the dimensions and margins of the graph
-          var width = 350;
-          var height = 350;
-          var margin = 40;
+    updateChart(){
+      if (this.searchword) {
+        // this.series = []
+        // this.$store.dispatch('GetChat', this.searchword)
+        // this.series.push(this.normal_data['jtbc'])
+        // this.series.push(this.normal_data['sbs'])
+        // this.series.push(this.normal_data['middle'])
 
-          // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-          var radius = Math.min(width, height) / 2 - margin;
+        this.series2[0]['data'] = []
+        this.series2[0]['data'].push(this.normal_data['jtbc'])
+        this.series2[0]['data'].push(this.normal_data['sbs'])
+        this.series2[0]['data'].push(this.normal_data['middle'])
+        this.series2[0]['data'].push(this.normal_data['kbs'])
 
-          // append the svg object to the div called 'my_dataviz'
-          var svg = d3
-            .select('#my_dataviz1')
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height)
-            .append('g')
-            .attr(
-              'transform',
-              'translate(' + width / 2 + ',' + height / 2 + ')'
-            );
-          // http.get(`/api/`)
-          // Create dummy data
-          var data = { a: 20, b: 20, c: 20, d: 20, e: 20 };
-
-          // set the color scale
-          var color = d3
-            .scaleOrdinal()
-            .domain(Object.keys(data))
-            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56']);
-
-          // Compute the position of each group on the pie:
-          var pie = d3.pie().value(function (d) {
-            return d[1];
-          });
-
-          var data_ready = pie(Object.entries(data));
-
-          // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-          svg
-            .selectAll('whatever')
-            .data(data_ready)
-            .enter()
-            .append('path')
-            .attr(
-              'd',
-              d3
-                .arc()
-                .innerRadius(100) // This is the size of the donut hole
-                .outerRadius(radius)
-            )
-            .attr('fill', function (d) {
-              return color(d.data[0]);
-            })
-            .attr('stroke', 'black')
-            .style('stroke-width', '2px')
-            .style('opacity', 0.7);
+        // this.series3[0]['data'] = []
+        // this.series3[0]['data'].push((this.normal_data['jtbc']/41280 * 100).toFixed(5))
+        // this.series3[0]['data'].push((this.normal_data['sbs']/99480 * 100).toFixed(5))
+        // this.series3[0]['data'].push((this.normal_data['middle']/112570 * 100).toFixed(5))
+      }
     }
-  }
+  },
+
+  computed: {
+    ...mapState([
+      'searchword',
+      'normal_data',
+    ]),
+    },
+  watch:{
+    'searchword':'updateChart'
+  },
+  mounted(){
+    this.updateChart()
+  },
+  // updated(){
+  //   this.updateChart()
+  // }
 };
 </script>
 <style>

@@ -22,15 +22,14 @@
             class="input"
             placeholder=" 키워드를 입력하세요"
             style="display: inline-block;"
-
+            @keydown.enter.prevent="search"
           />
           <v-btn
             color="white"
             icon
             x-large
             plain
-            @click="search"
-            @keyup.enter="search"
+            @click.prevent="search"
             style="margin-left:20px;"
           >Search
           </v-btn>
@@ -84,11 +83,15 @@ import {mapState} from 'vuex';
           // this.$router.go;
         }
         else{
+          // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight, 'smooth');
           this.$store.dispatch('SearchKeyword', this.keyword)
+          this.$store.dispatch('GetChat', this.keyword)
+          this.$store.dispatch('GetDoughnutData', this.keyword)
         // this.searched = true;
         http.post(`/api/keyword/search`, JSON.stringify(this.keyword)).then((data)=>{
-          console.log(data);
-          console.log(JSON.stringify(this.keyword));
+          // console.log(data);
+          // console.log(JSON.stringify(this.keyword));
+          this.keyword = '';
         }, error => {
           console.log(error);
         });

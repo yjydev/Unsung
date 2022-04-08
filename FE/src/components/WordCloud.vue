@@ -44,7 +44,7 @@ import "@/css/font.css";
       getKeyWordList(){
         http.get(`/api/keywordratio/search/wordcount`).then(({data})=>{
         this.words = data;
-        // console.log(this.words);
+        console.log(this.words);
         this.genLayout();
       })
       },
