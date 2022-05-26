@@ -6,31 +6,29 @@
       </v-col>
     </v-row>
     <v-row>
-    <v-col cols="6">
-      <word-cloud
-        :size="layout[0]"
-      />
-    </v-col>
-    <v-col cols="6">
-      <news
-        :size="layout[5]"
-      />
-    </v-col>
+      <v-col cols="6">
+        <word-cloud
+          :size="layout[0]"
+        />
+      </v-col>
+      <v-col cols="6">
+        <news
+          :size="layout[5]"
+        />
+      </v-col>
     </v-row>
     <v-row>
-    <v-col cols="6">
-      <chart
-      />
-    </v-col>
-    <v-col cols="6">
-      <normal-chart
-      />
-    </v-col>
+      <v-col cols="6">
+        <chart />
+      </v-col>
+      <v-col cols="6">
+        <normal-chart />
+      </v-col>
     </v-row>
     <v-row>
-    <v-col>
-      <trans-chart/>
-    </v-col>
+      <v-col>
+        <trans-chart />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -53,7 +51,6 @@
       layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
       page: 1,
     }),
-
 
     watch: {
       page () {
