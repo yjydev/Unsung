@@ -15,7 +15,7 @@ public interface KeywordRatioRepository extends JpaRepository<KeywordRatio, Long
             "union all" +
             "(select * from month where keyword=:keyword and press='SBS' and period = '2022-03')" +
             "union all" +
-            "(select * from month where keyword=:keyword and press'KBS' and period = '2022-03')", nativeQuery = true)
+            "(select * from month where keyword=:keyword and press='KBS' and period = '2022-03')", nativeQuery = true)
     List<KeywordPercent> findByKeyword(@Param("keyword") String keyword);
 
     @Query(value = "select keyword, total, positive, negative, period from month where keyword=:keyword and press=:press", nativeQuery = true)
